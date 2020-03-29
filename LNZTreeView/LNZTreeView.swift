@@ -469,6 +469,11 @@ extension LNZTreeView: UITableViewDelegate {
         delegate?.treeView?(self, commitDeleteForRowAt: indexInParent, forParentNode: node.parent)
     }
     
+    //MARK: -DID DESELECT ROW
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        
+    }
     
     //MARK: - DID SELECT ROW
     
@@ -488,7 +493,7 @@ extension LNZTreeView: UITableViewDelegate {
         
         
         //Added and Modified the delegate
-        delegate?.treeView?(self, didSelectNodeAt: node.indentationLevel, forNodeFirst: node.identifier, forNodeSecond: node.parent?.identifier, forNodeThird: node.parentParent?.identifier)
+        delegate?.treeView?(self, didSelectNodeAt: indexPath, forNodeLevel: node.indentationLevel, forNodeFirst: node.identifier, forNodeSecond: node.parent?.identifier, forNodeThird: node.parentParent?.identifier)
         
         print("Node LVL: \(node.indentationLevel)")
         print("Node Name: \(node.identifier)")
@@ -502,6 +507,13 @@ extension LNZTreeView: UITableViewDelegate {
             tableView.endUpdates()
         }
         
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        tableView.reloadRows(at: [indexPath], with: .fade)
+        //tableView.reloadSections([indexPath.section], with: .none)
+        DispatchQueue.main.async {
+            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+
         tableView.reloadRows(at: [indexPath], with: .fade)
         
         if node.isExpanded {

@@ -56,5 +56,5 @@ import Foundation
      - parameter indexPath: The indexPath of the selected node, relative to its *parentNode*.
      - parameter parentNode: The parentNode for the selected node. If nil, root is to be intended.
      */
-    @objc optional func treeView(_ treeView: LNZTreeView, didSelectNodeAt nodeLevel: Int, forNodeFirst nodeFirstID: String, forNodeSecond nodeSecondID: String?, forNodeThird nodeThirdID: String?)
+    @objc optional func treeView(_ treeView: LNZTreeView, didSelectNodeAt: IndexPath, forNodeLevel: Int, forNodeFirst nodeFirstID: String, forNodeSecond nodeSecondID: String?, forNodeThird nodeThirdID: String?)
 }
