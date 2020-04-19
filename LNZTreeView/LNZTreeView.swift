@@ -192,6 +192,13 @@ public class LNZTreeView: UIView {
         return true
     }
     
+    @discardableResult
+    public func selectTableViewRow(indexPath1: IndexPath, animated: Bool = false, scrollPosition: UITableView.ScrollPosition = .none) -> Bool {
+        tableView.selectRow(at: indexPath1, animated: animated, scrollPosition: scrollPosition)
+        tableView(tableView, didSelectRowAt: indexPath1)
+        return true
+    }
+    
     /**
      Retrieve the index path for a given node in a given section.
      */
